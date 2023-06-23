@@ -61,9 +61,15 @@ const App = () => {
 
   const selectChange = (val) => {
     let change = [...val].map((ele) => JSON.stringify(ele));
+
+    const filteredOptions = [...options] // duplicate options
+    .filter((e) => {
+      // converting option item to string for compare
+      return !change.includes(JSON.stringify(e))
+    })
     let initial = [
       ...val,
-      ...[...options].filter((e) => !change.includes(JSON.stringify(e))),
+      ...filteredOptions,
     ];
     setOptions(initial);
     setSelected(val);
@@ -116,3 +122,4 @@ const App = () => {
 };
 
 export default App;
+
